@@ -7,7 +7,7 @@ function Header() {
 
         <header className="header">
             <div className="logo">
-                <Link to='/'>Support</Link>
+                <Link to='/'>MiscName</Link>
             </div>
             <ul>
                 <li>
