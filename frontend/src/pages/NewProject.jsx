@@ -9,7 +9,7 @@ import BackButton from '../components/BackButton'
 
 function NewProject() {
   const {user} = useSelector((state) => state.auth)
-  const {isLoading, isError, isSuccess, message} =useSelector((state) => state.project)
+  const {isLoading, isError, isSuccess, message} =useSelector((state) => state.projects)
 
   const [name] = useState(user.name)
   const [email] = useState(user.email)

@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import NewProject from './pages/NewProject';
 import Register from './pages/Register'
+import Projects from './pages/Projects';
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
           <Route path='/register' element={<Register/>} />
           <Route path='/new-project' element={<PrivateRoute />}> 
            <Route path='/new-project' element={<NewProject />} />
+          </Route>
+          <Route path='/projects' element={<PrivateRoute />}> 
+           <Route path='/projects' element={<Projects />} />
           </Route>
         </Routes>
       </div>

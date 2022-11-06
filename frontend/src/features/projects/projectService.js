@@ -16,7 +16,22 @@ const createProject = async (projectData, token) => {
   return response.data;
 };
 
+//Get users tickets
+
+const getProjects = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(API_URL, config);
+
+  return response.data;
+};
+
 const projectService = {
   createProject,
+  getProjects
 };
 export default projectService;
