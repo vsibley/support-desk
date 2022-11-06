@@ -5,27 +5,21 @@ const projectSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref:'User'
+      ref: "User",
     },
-    platform: {
+    product: {
       type: String,
-      required: [true, "Please select what social media platform you will be collbarating on"],
-      enum: ['Instagram', 'TikTok', 'BeReel', 'Facebook']
+      required: [true, "Please select a product"],
+      enum: ["iPhone", "Macbook Pro", "iMac", "iPad"],
     },
     description: {
       type: String,
-      required: [true, "Please add a description of the collab details"],
-    },
-    collab: {
-      type: String,
-      required: true,
-      enum: ['Paid Partnership', 'Product Partnership', 'Unpaid', 'Brand Ambassador'],
-      default: false,
+      required: [true, "Please enter a description of the issue"],
     },
     status: {
       type: String,
       required: true,
-      enum: ['new', 'in-progress', 'closed'],
+      enum: ["new", "open", "closed"],
       default: "new",
     },
   },
