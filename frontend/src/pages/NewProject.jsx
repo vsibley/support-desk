@@ -1,22 +1,51 @@
-import {useState} from 'react'
-import {useSelector} from 'react-redux'
+import {useState, useEffect} from 'react'
+import {useSelector,useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {toast} from 'react-toastify'
+import {createProject, reset} from '../features/projects/projectSlice'
+import Spinner from '../components/Spinner'
+import BackButton from '../components/BackButton'
 
 
 function NewProject() {
   const {user} = useSelector((state) => state.auth)
+  const {isLoading, isError, isSuccess, message} =useSelector((state) => state.project)
+
   const [name] = useState(user.name)
   const [email] = useState(user.email)
   const [product, setProduct] = useState('iPhone')
   const [description, setDescription] = useState('')
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   const onSubmit = (e) => {
     e.preventDefault()
-
+    dispatch(createProject({product, description}))
   }
+  
 
+  useEffect(() => {
+    if(isError) {
+      toast.error(message)
+    }
+
+    if(isSuccess) {
+      dispatch(reset())
+      navigate('/projects')
+    }
+
+    dispatch(reset())
+  }, [dispatch, isError, isSuccess, navigate, message])
+  
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <>
+    <BackButton url='/'/>
       <section className="heading">
         <h1>Create a new project</h1>
         <p>Please fill out the form below</p>

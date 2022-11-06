@@ -12,7 +12,7 @@ const initialState = {
   message: "",
 };
 
-// Register new user ** This is how we get the form hooked up to our backend API
+// Register new user ** 
 export const register = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
