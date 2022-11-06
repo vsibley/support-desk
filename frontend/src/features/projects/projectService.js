@@ -42,11 +42,27 @@ const getProject = async (projectId, token) => {
   const response = await axios.get(API_URL + projectId, config);
 
   return response.data;
-};
+}
+
+// Close a project
+
+const closeProject = async (projectId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(API_URL + projectId,{status: 'closed'}, config);
+
+  return response.data;
+}
+
 
 const projectService = {
   createProject,
   getProjects,
-  getProject
+  getProject,
+  closeProject
 };
 export default projectService;

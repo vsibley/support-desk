@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import { getProject, reset } from '../features/projects/projectSlice'
+import { getProject, reset, closeProject } from '../features/projects/projectSlice'
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 import { toast } from 'react-toastify'
+
 
 
 function Project() {
@@ -12,8 +14,15 @@ function Project() {
 
     const params = useParams()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const { projectId } = useParams()
+
+    const onProjectClose = (e) => {
+        dispatch(closeProject(projectId))
+        toast.success('Your project has offically been closed')
+        navigate('/projects')
+    }
 
     useEffect(() => {
         if (isError) {
@@ -36,13 +45,13 @@ function Project() {
 
     return (
         <div className='ticket-page'>
-            <header className="ticker-header">
+            <header className="ticket-header">
                 <BackButton url='/projects' />
-                <h2>Project ID: {project._id}
+                <h3>{project.product} - Project ID: {project._id}
                     <span className={`status status-${project.status}`}>
                         {project.status}
                     </span>
-                </h2>
+                </h3>
                 <h3>Start Date: {new Date(project.createdAt).toLocaleString('en-US')} </h3>
             <hr />
             <div className="ticket-desc">
@@ -50,6 +59,11 @@ function Project() {
                         <p>{project.description}</p>
             </div>
             </header>
+            {project.status !== 'closed' && (
+                <button className="btn btn-block btn-danger" onClick={onProjectClose}>
+                    Close Project
+                </button>
+            )}
         </div>
     )
 }

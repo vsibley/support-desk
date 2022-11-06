@@ -70,6 +70,26 @@ export const getProject = createAsyncThunk(
       return thunkAPI.rejectWithValue(message);
     }
   }
+)
+
+// Close a projects ** 
+export const closeProject = createAsyncThunk(
+  "project/close",
+  async (projectId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await projectService.closeProject(projectId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
 );
 
 export const projectSlice = createSlice({
@@ -117,6 +137,10 @@ export const projectSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(closeProject.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.projects.map((project) => project._id === action.payload._id ? (project.status = 'closed') : project)
       })
   },
 });
