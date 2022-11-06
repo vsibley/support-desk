@@ -32,8 +32,28 @@ export const createProject = createAsyncThunk(
 );
 
 
-// Get users proects ** 
+// Get users projects ** 
 export const getProjects = createAsyncThunk(
+  "project/getAll",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await projectService.getProjects(token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+)
+
+// Get a single projects ** 
+export const getProject = createAsyncThunk(
   "project/getall",
   async (_, thunkAPI) => {
     try {

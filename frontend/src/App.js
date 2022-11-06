@@ -7,7 +7,8 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import NewProject from './pages/NewProject';
 import Register from './pages/Register'
-import Projects from './pages/Projects';
+import Projects from './pages/Projects'
+import Project from './pages/Project';
 
 
 function App() {
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path='/projects' element={<PrivateRoute />}> 
            <Route path='/projects' element={<Projects />} />
+          </Route>
+          <Route path='/project/:projectId' element={<PrivateRoute />}> 
+           <Route path='/project/:projectId' element={<Project />} />
           </Route>
         </Routes>
       </div>
