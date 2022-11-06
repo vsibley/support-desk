@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getProjects, reset } from '../features/projects/projectSlice'
 import Spinner from '../components/Spinner'
 import BackButton from '../components/BackButton'
+import ProjectItem from '../components/ProjectItem'
 
 function Projects() {
     const { projects, isLoading, isSuccess } = useSelector((state) => state.projects)
@@ -28,9 +29,21 @@ function Projects() {
     }
 
     return (
-        <div>
-            Projects
-        </div>
+        <>
+        <BackButton url='/'/>
+            <h1>Your Projects</h1>
+            <div className="tickets">
+                <div className="ticket-headings">
+                    <div>Date</div>
+                    <div>Product</div>
+                    <div>Staus</div>
+                    <div></div>
+                </div>
+                {projects.map((project) => (
+                    <ProjectItem key={project._id} project={project}/>
+                ))}
+            </div>
+        </>
     )
 }
 

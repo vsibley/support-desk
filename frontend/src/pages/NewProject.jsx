@@ -66,7 +66,8 @@ function NewProject() {
           <select name="product" id="product" value={product} onChange={(e) => setProduct(e.target.value)}>
             <option value="iPhone">iPhone</option>
             <option value="iPad">iPad</option>
-            <option value="macBook">MacBook</option>
+            <option value="MacBook">MacBook</option>
+            <option value="iMac">iMac</option>
 
           </select>
           </div>
