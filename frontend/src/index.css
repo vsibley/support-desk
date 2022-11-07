@@ -18,6 +18,7 @@ a {
 
 p {
   line-height: 1.7;
+  font-weight: 400;
 }
 
 ul {
@@ -29,10 +30,17 @@ li {
 }
 
 h1,
-h2,
-h3 {
+h2
+ {
   font-weight: 600;
   margin-bottom: 10px;
+}
+
+h3
+ {
+  font-weight: 300;
+  margin-bottom: 10px;
+  font-size: x-large;
 }
 
 .container {
@@ -68,7 +76,7 @@ h3 {
 }
 
 .header ul li a:hover {
-  color: #777;
+  color:#106a9a;
 }
 
 .header ul li a svg {
@@ -83,7 +91,7 @@ h3 {
 }
 
 .heading p {
-  color: #828282;
+  color: #106a9a;
 }
 
 .boxes {
@@ -240,6 +248,12 @@ h3 {
 .status-new {
   background-color: green;
   color: #fff;
+  border-radius: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
   border-radius: 10px;
 }
 

@@ -1,13 +1,21 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { FaRegFolderOpen, FaListUl } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
+import Hero from '../components/Hero'
 
 function Home() {
+  const { user, isLoading, isSuccess, isError, message } = useSelector(state => state.auth)
+
   return (
     <>
-      <section className="heading">
-        <h1>What are we working on today?</h1>
-        <p>Please choose from one of the options</p>
+    {user ? 
+    <>
+    <section className="heading">
+        <h1>Hello, welcome</h1>
+        <p>to the Social Assitant.</p>
+        <h3>What are we working on today?</h3>
+
       </section>
       <Link to='/new-project' className='btn btn-reverse btn-block'> 
         <FaRegFolderOpen /> START NEW PROJECT
@@ -16,6 +24,8 @@ function Home() {
         <FaListUl /> VIEW MY PROJECTS
       </Link>
       </>
+    : <Hero />}
+    </>
   )
 }
 
