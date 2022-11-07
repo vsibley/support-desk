@@ -4,7 +4,7 @@ import React from 'react'
 function ProjectItem({project}) {
   return (
     <div className='ticket'>
-        <div>{new Date(project.createdAt).toLocaleString('en-US')}</div>
+        <div>{new Date(project.createdAt).toLocaleDateString('en-US')}</div>
         <div>{project.product}</div>
         <div className={`status status-${project.status}`}>
             {project.status}

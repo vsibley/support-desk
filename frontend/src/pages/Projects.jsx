@@ -8,6 +8,7 @@ import ProjectItem from '../components/ProjectItem'
 function Projects() {
     const { projects, isLoading, isSuccess } = useSelector((state) => state.projects)
 
+
     const dispatch = useDispatch()
 
     useEffect(() => {

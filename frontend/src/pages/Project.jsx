@@ -3,20 +3,24 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { getProject, reset, closeProject } from '../features/projects/projectSlice'
+import { getNotes, reset as notesReset } from '../features/notes/noteSlice'
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 import { toast } from 'react-toastify'
+import NoteItem from '../components/NoteItem'
 
 
 
 function Project() {
     const { project, isLoading, isSuccess, isError, message } = useSelector((state) => state.projects)
+    const { notes, isLoading: notesIsLoading } = useSelector((state) => state.notes)
 
     const params = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const { projectId } = useParams()
+
 
     const onProjectClose = (e) => {
         dispatch(closeProject(projectId))
@@ -30,10 +34,11 @@ function Project() {
         }
 
         dispatch(getProject(projectId))
+        dispatch(getNotes(projectId))
         //eslint-disable-next-line
     }, [isError, message, projectId])
 
-    if (isLoading) {
+    if (isLoading || notesIsLoading) {
         return <Spinner />
     }
 
@@ -52,13 +57,18 @@ function Project() {
                         {project.status}
                     </span>
                 </h3>
-                <h3>Start Date: {new Date(project.createdAt).toLocaleString('en-US')} </h3>
+                <h3>Start Date: {new Date(project.createdAt).toLocaleDateString('en-US')} </h3>
             <hr />
             <div className="ticket-desc">
                     <h3>Description: </h3>
                         <p>{project.description}</p>
             </div>
+            <h2>Notes:</h2>
             </header>
+            {notes.map((note) =>(
+                <NoteItem key={note._id} note={note}/>
+            ))}
+
             {project.status !== 'closed' && (
                 <button className="btn btn-block btn-danger" onClick={onProjectClose}>
                     Close Project
