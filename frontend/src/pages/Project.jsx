@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import {FaPlus} from 'react-icons/fa'
 import { RiCloseCircleLine } from 'react-icons/ri'
 import { getProject, reset, closeProject } from '../features/projects/projectSlice'
-import { getNotes, reset as notesReset } from '../features/notes/noteSlice'
+import { getNotes, reset as notesReset, createNote } from '../features/notes/noteSlice'
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 import { toast } from 'react-toastify'
@@ -55,7 +55,7 @@ function Project() {
     // Submit Notes
     const onNoteSubmit = (e) =>{
         e.preventDefault()
-        console.log('submit')
+        dispatch(createNote({noteText, projectId}))
         closeModal()
         
     }
