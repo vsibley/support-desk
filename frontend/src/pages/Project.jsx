@@ -1,17 +1,37 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
+import {FaPlus} from 'react-icons/fa'
+import { RiCloseCircleLine } from 'react-icons/ri'
 import { getProject, reset, closeProject } from '../features/projects/projectSlice'
 import { getNotes, reset as notesReset } from '../features/notes/noteSlice'
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 import { toast } from 'react-toastify'
 import NoteItem from '../components/NoteItem'
+import Modal from 'react-modal'
+
+const customStyles = {
+    content: {
+        width: '600px',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        position: 'relative',
+    },
+}
 
 
+Modal.setAppElement('#root')
 
 function Project() {
+    const [modalisOpen, setModalisOpen] = useState(false)
+    const [noteText, setNoteText] = useState('')
+
     const { project, isLoading, isSuccess, isError, message } = useSelector((state) => state.projects)
     const { notes, isLoading: notesIsLoading } = useSelector((state) => state.notes)
 
@@ -21,11 +41,23 @@ function Project() {
 
     const { projectId } = useParams()
 
-
+//Closing a project
     const onProjectClose = (e) => {
         dispatch(closeProject(projectId))
         toast.success('Your project has offically been closed')
         navigate('/projects')
+    }
+
+    //Open Modal 
+    const openModal = () => setModalisOpen(true)
+    const closeModal = () => setModalisOpen(false)
+
+    // Submit Notes
+    const onNoteSubmit = (e) =>{
+        e.preventDefault()
+        console.log('submit')
+        closeModal()
+        
     }
 
     useEffect(() => {
@@ -65,6 +97,31 @@ function Project() {
             </div>
             <h2>Notes:</h2>
             </header>
+
+            {project.status !== 'closed' && (
+                <button className="btn" onClick={openModal}>
+                    <FaPlus /> Add Note
+                    </button>
+            )}
+
+            <Modal isOpen={modalisOpen} onRequestClose={closeModal} style={customStyles} contentLabel='Add Note'>
+                <h2>Add Note</h2>
+                <button className="btn-close" onClick={closeModal}>
+                    <RiCloseCircleLine style={{color: 'red'}}/>
+                </button>
+                <form onSubmit={onNoteSubmit}>
+                    <div className="form-group">
+                        <textarea name="noteText" id="noteText" className='from-control' placeholder='Whats on your mind?' onChange={(e) => setNoteText(e.target.value)}>
+
+                        </textarea>
+                    </div>
+                    <div className="form-group">
+                        <button className="btn" type='submit'> Submit</button>
+                    </div>
+
+                </form>
+            </Modal>
+
             {notes.map((note) =>(
                 <NoteItem key={note._id} note={note}/>
             ))}
