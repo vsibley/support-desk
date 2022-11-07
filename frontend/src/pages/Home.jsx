@@ -5,15 +5,15 @@ import { useSelector } from 'react-redux'
 import Hero from '../components/Hero'
 
 function Home() {
-  const { user, isLoading, isSuccess, isError, message } = useSelector(state => state.auth)
+  const { user} = useSelector(state => state.auth)
 
   return (
     <>
     {user ? 
-    <>
+          <div className='page'>
     <section className="heading">
-        <h1>Hello, welcome</h1>
-        <p>to the Social Assitant.</p>
+        <h1>Hello, {user.name}</h1>
+        <p>Welcome to the Social Assitant.</p>
         <h3>What are we working on today?</h3>
 
       </section>
@@ -23,8 +23,9 @@ function Home() {
       <Link to='projects' className='btn btn-block'> 
         <FaListUl /> VIEW MY PROJECTS
       </Link>
-      </>
+      </div>
     : <Hero />}
+
     </>
   )
 }

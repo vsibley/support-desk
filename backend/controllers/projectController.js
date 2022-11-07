@@ -49,9 +49,9 @@ const getSingleProject = asyncHandler(async (req, res) => {
 // @route  POST/api/projects
 // @access  Private
 const createProject = asyncHandler(async (req, res) => {
-  const { product, description } = req.body;
+  const { product, description, desc } = req.body;
 
-  if (!product || !description) {
+  if (!product || !description ||!desc) {
     res.status(400);
     throw new Error("Please add collab type and description");
   }
@@ -66,6 +66,7 @@ const createProject = asyncHandler(async (req, res) => {
   const project = await Project.create({
     product, 
     description,
+    desc,
     user: req.user.id,
     status: 'new'
   })

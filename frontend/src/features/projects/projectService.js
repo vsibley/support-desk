@@ -16,8 +16,8 @@ const createProject = async (projectData, token) => {
   return response.data;
 };
 
-//Get users tickets
 
+//Get users tickets
 const getProjects = async (token) => {
   const config = {
     headers: {

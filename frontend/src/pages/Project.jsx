@@ -81,15 +81,20 @@ function Project() {
     }
 
     return (
-        <div className='ticket-page'>
-            <header className="ticket-header">
+        <div className='ticket-page page'>
+            <header className="ticket-header ">
                 <BackButton url='/projects' />
-                <h3>{project.product} - Project ID: {project._id}
+                <h1 className='project-name'>Project Name: </h1>
+                <h3 className=''> {project.desc}</h3>
+                <h2>Start Date: {new Date(project.createdAt).toLocaleDateString('en-US')} </h2>
+                <h2>Social Platform: {project.product}</h2>
+                <h2>
+                    Project ID: {project._id}
                     <span className={`status status-${project.status}`}>
                         {project.status}
                     </span>
-                </h3>
-                <h3>Start Date: {new Date(project.createdAt).toLocaleDateString('en-US')} </h3>
+                </h2>
+                
             <hr />
             <div className="ticket-desc">
                     <h3>Description: </h3>

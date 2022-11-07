@@ -31,18 +31,20 @@ function Projects() {
 
     return (
         <>
+            <div className='page'>
         <BackButton url='/'/>
             <h1>Your Projects</h1>
             <div className="tickets">
                 <div className="ticket-headings">
                     <div>Date</div>
-                    <div>Product</div>
+                    <div>Project Name</div>
                     <div>Staus</div>
-                    <div></div>
                 </div>
                 {projects.map((project) => (
                     <ProjectItem key={project._id} project={project}/>
                 ))}
+                
+            </div>
             </div>
         </>
     )

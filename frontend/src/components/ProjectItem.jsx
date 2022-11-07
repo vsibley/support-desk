@@ -5,7 +5,7 @@ function ProjectItem({project}) {
   return (
     <div className='ticket'>
         <div>{new Date(project.createdAt).toLocaleDateString('en-US')}</div>
-        <div>{project.product}</div>
+        <div>{project.desc}</div>
         <div className={`status status-${project.status}`}>
             {project.status}
         </div>

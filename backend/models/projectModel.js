@@ -16,6 +16,10 @@ const projectSchema = mongoose.Schema(
       type: String,
       required: [true, "Please enter a description of the issue"],
     },
+    desc: {
+      type: String,
+      required: [true, "Please enter a description of the issue"],
+    },
     status: {
       type: String,
       required: true,
