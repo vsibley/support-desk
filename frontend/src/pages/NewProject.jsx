@@ -64,10 +64,10 @@ function NewProject() {
           <div className="form-group">
           <label htmlFor="product">Product</label>
           <select name="product" id="product" value={product} onChange={(e) => setProduct(e.target.value)}>
-            <option value="iPhone">iPhone</option>
-            <option value="iPad">iPad</option>
-            <option value="MacBook">MacBook</option>
-            <option value="iMac">iMac</option>
+            <option value="Instagram">Instagram</option>
+            <option value="TikTok">Tik-Tok</option>
+            <option value="BeReel">BeReel</option>
+              <option value="Pinterest">Pinterest</option>
 
           </select>
           </div>
