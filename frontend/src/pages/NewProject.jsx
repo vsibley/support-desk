@@ -55,14 +55,14 @@ function NewProject() {
         </section>
 
         <section className="form">
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="name">Influencer Name:</label>
             <input type="text" value={name} className="form-control" disabled />
           </div>
           <div className="form-group">
             <label htmlFor="email">Influencer Email</label>
             <input type="text" value={email} className="form-control" disabled />
-          </div>
+          </div> */}
 
           <form onSubmit={onSubmit}>
             <div className="form-group">    
