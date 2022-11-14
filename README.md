@@ -25,8 +25,8 @@
 <!-- TechStack Used -->
 ### :computer: Tech Stack
 
-<details>
-  <summary>Client</summary>
+
+ 
   <ul>
     <li><a href="https://reactjs.org/">React.js</a></li>
     <li><a href="https://expressjs.com/">Express.js</a></li>
